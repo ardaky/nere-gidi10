@@ -19,3 +19,5 @@ dolandiricilarkrali@gmail.com
 
 testfirmasi@test.com
 123456
+
+NOT ! : Eğer geçerli olmayan bir kupon kodunu satın alma işlemi sırasında girerseniz sizi 404 sayfasına fırlatıyor. Bunu son anda gördüm. Düzeltmek için vaktim olmadı.
