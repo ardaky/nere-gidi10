@@ -1,7 +1,10 @@
 Varsayılan Giriş Bilgileri:
 
 Genel Admin:
-arda.kerem88@gmail.com
+admin@admin.com
+123456
+
+arda@gmail.com
 123456
 
 Firma Adminleri:
