@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include 'header.php';
 
 try {
@@ -59,6 +60,16 @@ function generate_image_filename($city_name) {
         overflow: hidden;
         text-overflow: ellipsis;
     }
+    .js-check-login.disabled-by-js {
+        pointer-events: none;
+        opacity: 0.6;
+        cursor: default;
+    }
+    .btn-disabled {
+    pointer-events: none;
+    opacity: 0.6 !important;
+    cursor: not-allowed !important;
+}
 </style>
 
 <div class="bg-dark text-light p-5 mb-4 rounded-3 shadow hero-section">
@@ -145,7 +156,7 @@ function generate_image_filename($city_name) {
                 <img src="<?php echo htmlspecialchars($img_path_3); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($dest_city_3); ?>">
                 <div class="card-body">
                     <h5 class="card-title route-card-title">Ankara <i class="bi bi-arrow-right"></i> <?php echo htmlspecialchars($dest_city_3); ?></h5>
-                     <a href="#" class="btn btn-sm btn-outline-primary disabled mt-2">Yakında</a>
+                    <a href="#" class="btn btn-sm btn-outline-primary disabled mt-2">Yakında</a>
                 </div>
             </div>
         </div>
@@ -179,7 +190,14 @@ function generate_image_filename($city_name) {
                             </h5>
                             <p class="card-text text-muted small mb-2"><?php echo htmlspecialchars($sefer['firma_adi']); ?></p>
                             <p class="card-text fw-bold text-danger fs-5 mb-auto"><?php echo htmlspecialchars($sefer['price']); ?> TL</p>
-                            <a href="biletal.php?sefer_id=<?php echo $sefer['trip_uuid']; ?>" class="btn btn-sm btn-primary mt-2">Bilet Al</a>
+                            <?php 
+    $is_logged_in = isset($_SESSION['kullanici_uuid']);
+    $link_href = $is_logged_in ? 'biletal.php?sefer_id=' . $sefer['trip_uuid'] : 'login.php';
+    $link_class = $is_logged_in ? 'btn-primary' : 'btn-secondary btn-disabled';
+                                ?>
+                                <a href="<?php echo $link_href; ?>" class="btn btn-sm <?php echo $link_class; ?> mt-2" title="Bilet Al">
+                                    Bilet Al
+                                </a>
                         </div>
                     </div>
                 </div>
@@ -194,7 +212,21 @@ function generate_image_filename($city_name) {
 </footer>
 
 <script>
+    const IS_LOGGED_IN = <?php echo isset($_SESSION['kullanici_uuid']) ? 'true' : 'false'; ?>;
+    
     document.addEventListener('DOMContentLoaded',function(){
+        if (IS_LOGGED_IN === 'false') {
+            document.querySelectorAll('.js-check-login').forEach(link => {
+                link.classList.add('disabled-by-js'); 
+
+                link.addEventListener('click', function(e) {
+                    e.preventDefault(); 
+                    alert('Bilet satın almak için lütfen Giriş Yapın.');
+                    window.location.href = 'login.php';
+                });
+            });
+        }
+        
         const k=document.getElementById('kalkis_select'), v=document.getElementById('varis_select');
         function u(){
             if(!k||!v) return;

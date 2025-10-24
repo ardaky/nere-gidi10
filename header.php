@@ -1,4 +1,6 @@
 <?php
+ob_start();
+
 require 'config.php';
 
 $basari_mesaji_header = $_SESSION['basari_mesaji'] ?? null;
@@ -6,7 +8,6 @@ $hata_mesaji_header = $_SESSION['hata_mesaji'] ?? null;
 
 unset($_SESSION['basari_mesaji']);
 unset($_SESSION['hata_mesaji']);
-
 ?>
 <!DOCTYPE html>
 <html lang="tr">
@@ -30,9 +31,8 @@ unset($_SESSION['hata_mesaji']);
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
-    <div class="container">
-        <a class="navbar-brand fs-4 me-lg-4" href="index.php">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3 rounded">
+    <div class="container"> <a class="navbar-brand fs-4 me-lg-4" href="index.php">
             <span class="text-primary"><i class="bi bi-bus-front-fill"></i></span>
             Nere Gidi<span class="text-primary">10</span>
         </a>
@@ -42,8 +42,8 @@ unset($_SESSION['hata_mesaji']);
         <div class="collapse navbar-collapse" id="navbarMenu">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link active fs-5 ms-3" aria-current="page" href="index.php">Ana Sayfa</a></li>
-                <li class="nav-item"><a class="nav-link fs-5 active ms-4" href="hakkimizda.php">Hakkımızda</a></li>
-                <li class="nav-item"><a class="nav-link fs-5 active ms-4" href="firmalarimiz.php">Firmalarımız</a></li>
+                <li class="nav-item"><a class="nav-link fs-5 ms-4 active" href="hakkimizda.php">Hakkımızda</a></li>
+                <li class="nav-item"><a class="nav-link fs-5 ms-4 active" href="firmalarimiz.php">Firmalarımız</a></li>
             </ul>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
                 <?php if (isset($_SESSION['kullanici_uuid'])): ?>
@@ -76,7 +76,7 @@ unset($_SESSION['hata_mesaji']);
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<div class="container my-4">
+<div class="container mt-4">
     <?php if ($basari_mesaji_header): ?>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <?php echo $basari_mesaji_header; ?>
@@ -89,3 +89,4 @@ unset($_SESSION['hata_mesaji']);
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     <?php endif; ?>
+</div>

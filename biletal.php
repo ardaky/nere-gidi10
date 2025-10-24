@@ -1,9 +1,13 @@
 <?php
+ob_start();
+
 include 'header.php';
 
 if (!isset($_SESSION['kullanici_uuid']) || $_SESSION['kullanici_rolu'] !== 'user') {
-    // Admin/Firma Admin buraya düşer
-    $_SESSION['hata_mesaji'] = "Sadece Yolcu (User) rolündeki kullanıcılar bilet satın alabilir.";
+$_SESSION['hata_mesaji'] = "Sadece Yolcu (User) rolündeki kullanıcılar bilet satın alabilir.";
+    
+    if (ob_get_contents()) { ob_clean(); }
+    
     header("Location: index.php");
     exit;
 }
@@ -73,7 +77,7 @@ function render_seat($seat_num, $dolu_koltuk_map) {
     .seat-label.seat-disabled { background-color: #6c757d; border-color: #6c757d; color: #fff; opacity: 0.7; }
     .seat input[type=checkbox]:checked + .seat-label { background-color: #E63946 !important; border-color: #E63946 !important; color: #fff !important; }
     .back-row { border-top: 1px dashed #6c757d; padding-top: 8px; }
-    .firma-logo-small { height: 35px; max-width: 100px; object-fit: contain; } /* Logo için yeni stil */
+    .firma-logo-small { height: 35px; max-width: 100px; object-fit: contain; }
 </style>
 
 <form action="onay.php" method="POST">

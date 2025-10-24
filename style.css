@@ -142,3 +142,15 @@ body.arkaplan-gri {
     width: 100%;
     max-width: 400px;
 }
+
+.container {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+body {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}
